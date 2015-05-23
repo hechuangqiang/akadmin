@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>复制插件</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="res/public/highlight/zenburn.css">
+</head>
+<body>
+
+<!-- 面包屑导航 -->
+<ol class="breadcrumb tool_margin_bottom_0 tool_border_radius_0 tool_border_bottom_style">
+  <li>
+    <a href="/">首页</a>
+  </li>
+  <li class="active">复制插件 Zero Clipboard</li>
+</ol>
+<div class="page_content">
+  <div class="page-header">
+    <h1>
+      复制插件
+      <small>zeroClipboard.html</small>
+    </h1>
+  </div>
+  <div id="alertDanger" class="alert alert-danger" style="display:none;" role="alert">复制插件必须在服务器端运行，本地运行无效。</div>
+  <h2>示例</h2>
+  <div class="col-sm-5">
+    <textarea class="form-control" rows="3" id="txtCopy" placeholder="输入要复制的文本"></textarea>
+  </div>
+  <div class="col-sm-2">
+    <button id="copy-button" class="btn btn-primary">Copy</button>
+  </div>
+  <div class="col-sm-5">
+    <div class="well" style="height:100px; overflow:auto;" id="copyShow">
+      
+    </div>
+  </div>
+
+  <h2>使用</h2>
+  <div class="highlight">
+    <span class="btn_copy">复制</span>
+    <pre><code class="javascript hljs ">
+        seajs.use([<span class="hljs-string">'zeroClipboard'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(zero)</span></span>{
+          <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> ZeroClipboard( <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"copy-button"</span>) );   <span class="hljs-comment">//copy-button是复制按钮的id</span>
+
+          client.on(<span class="hljs-string">"ready"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(readyEvent)</span></span>{    <span class="hljs-comment">//加载事件</span>
+            client.on( <span class="hljs-string">"copy"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( event )</span> </span>{    <span class="hljs-comment">//点击按钮事件</span>
+              ZeroClipboard.setData({
+                <span class="hljs-string">'text/plain'</span>: $(<span class="hljs-string">"#txtCopy"</span>).val()   <span class="hljs-comment">//动态设置要复制的内容</span>
+              });
+            });
+
+            client.on(<span class="hljs-string">"aftercopy"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span>{   <span class="hljs-comment">//点击按钮之后 触发 事件</span>
+              $(<span class="hljs-string">"#copyShow"</span>).append(event.data[<span class="hljs-string">"text/plain"</span>]+<span class="hljs-string">"&lt;br/&gt;"</span>);    <span class="hljs-comment">//event.data["text/plain"] 获取该格式的内容</span>
+            });
+          });
+        });
+      </code></pre>
+  </div>
+</div>
+
+
+<script>
+  if(window.location.protocol === "file:"){
+    $("#alertDanger").show();   //本地打开此页面给予不支持的提示
+  }
+  seajs.use(['zeroClipboard', 'endCopy'], function(zero, endCopy){
+    var client = new zero( document.getElementById("copy-button") );   //copy-button是复制按钮的id
+
+    client.on("ready", function(readyEvent){    //加载事件
+      client.on( "copy", function( event ) {    //点击按钮事件
+        zero.setData({
+          'text/plain': $("#txtCopy").val()   //动态设置要复制的内容
+        });
+      });
+
+      client.on("aftercopy", function(event){   //点击按钮之后 触发 事件
+        $("#copyShow").append(event.data["text/plain"]+"<br/>");    //event.data["text/plain"] 获取该格式的内容
+      });
+    });
+
+    //统一初始化 代码复制
+    endCopy.init({btn:'span.btn_copy'});
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>插件列表</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body>
+
+  <!-- 面包屑导航 -->
+  	<ol class="breadcrumb tool_margin_bottom_0 tool_border_radius_0 tool_border_bottom_style">
+    	<li>
+      	<a href="index.html">首页</a>
+    	</li>
+    	<li class="active">用户列表</li>
+  	</ol>
+	<div class="page_content">
+		<div class="page-header">
+	      	<form class="form-inline">
+				<button type="button" class="btn btn-info">添加</button>
+				<button type="button" class="btn btn-info">修改</button>
+				<button type="button" class="btn btn-info">删除</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<div class="form-group">
+					<label for="exampleInputName">姓名</label>
+					<input type="text" class="form-control" id="exampleInputName" placeholder="张三">
+				</div>
+				&nbsp;
+				<div class="form-group">
+					<label for="exampleInputPhone">手机:</label>
+					<input type="text" class="form-control" id="exampleInputPhone" placeholder="13730107785">
+				</div>
+				<button type="button" class="btn btn-primary">查找</button>
+			</form>
+	    </div>
+		<div class="table-responsive">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th width="10px"><input type="checkbox"></input></th>
+						<th>序号</th>
+						<th>姓名</th>
+						<th>部门</th>
+						<th>email</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{range .users}}
+					<tr>
+						<td><input type="checkbox"></input></td>
+						<td></td>
+						<td>{{.}}</td>
+						<td></td>
+						<td></td>
+					</tr>
+					{{end}}
+				</tbody>
+			</table>
+			<div id="dibu" class="text-left">
+				<nav>
+				    <ul class="pagination">
+					    <li>
+					      <a href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    <li><a href="#">1</a></li>
+					    <li><a href="#">2</a></li>
+					    <li><a href="#">3</a></li>
+					    <li><a href="#">4</a></li>
+					    <li><a href="#">5</a></li>
+					    <li>
+					      <a href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+				    </ul>
+				</nav>
+			<div>
+		</div>
+	</div>
+</body>
+</html>
