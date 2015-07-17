@@ -9,4 +9,7 @@ func init() {
 	ak.AddRoute("/reqlogin", reqLogin)
 	ak.AddRoute("/login", login)
 	ak.AddRoute("/logout", logout)
+	ak.AddRoute("/users",func(c *ak.Context){
+		c.WriteTpl("users.html")
+	})
 }

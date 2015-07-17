@@ -30,7 +30,7 @@
 </head>
 <body>
 	<div class="container">
-		<form class="form-signin" role="form" action="/login">
+		<form class="form-signin" role="form" action="/login" method="post">
 			<h2 class="form-signin-heading">欢迎登录</h2>
 			<input type="text" class="form-control" placeholder="帐号" name="loginName" required oninvalid="setCustomValidity('请填写帐号')" oninput="setCustomValidity('')" autofocus>
 			<input type="password" class="form-control" placeholder="密码" name="pwd" oninvalid="setCustomValidity('请填写密码')" oninput="setCustomValidity('')" required>
